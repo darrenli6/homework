@@ -9,8 +9,10 @@ async function main() {
 
     console.log("counter deployed to : ",counter.address)
 
+     
+    let Artifact=await artifacts.readArtifact("Counter")
 
-
+     
 
 }
 
