@@ -98,6 +98,58 @@ contract Bank{
 
 } 
 ```
+- 编译
+  ```
+  darren@darrendeMacBook-Pro code % pwd
+   /Users/darren/Documents/project/ok/homework/w2-1/code
+   darren@darrendeMacBook-Pro code % truffle compile
+
+   Compiling your contracts...
+   ===========================
+   `> Compiling ./contracts/Bank.sol
+   > Compilation warnings encountered:
+
+      project:/contracts/Bank.sol: Warning: SPDX license identifier not provided in source file. Before publishing, consider adding a comment containing "SPDX-License-Identifier: <SPDX-License>" to each source file. Use "SPDX-License-Identifier: UNLICENSED" for non-open-source code. Please see https://spdx.org for more information.
+   ,project:/contracts/safemath.sol: Warning: SPDX license identifier not provided in source file. Before publishing, consider adding a comment containing "SPDX-License-Identifier: <SPDX-License>" to each source file. Use "SPDX-License-Identifier: UNLICENSED" for non-open-source code. Please see https://spdx.org for more information.
+
+   > Artifacts written to /Users/darren/Documents/project/ok/homework/w2-1/code/build/contracts
+   > Compiled successfully using:
+      - solc: 0.6.11+commit.5ef660b1.Emscripte`n.clang
+  ```
+  
+
+
+- 测试
+       
+
+      darren@darrendeMacBook-Pro code % truffle test
+      Using network 'development'.
+
+         Compiling your contracts...
+         ===========================
+         > Compiling ./contracts/Bank.sol
+         > Compilation warnings encountered:
+
+            project:/contracts/Bank.sol: Warning: SPDX license identifier not provided in source file. Before publishing, consider adding a comment containing "SPDX-License-Identifier: <SPDX-License>" to each source file. Use "SPDX-License-Identifier: UNLICENSED" for non-open-source code. Please see https://spdx.org for more information.
+         ,project:/contracts/safemath.sol: Warning: SPDX license identifier not provided in source file. Before publishing, consider adding a comment containing "SPDX-License-Identifier: <SPDX-License>" to each source file. Use "SPDX-License-Identifier: UNLICENSED" for non-open-source code. Please see https://spdx.org for more information.
+
+      > Artifacts written to /var/folders/yw/k_z0z4393mz698xzl0df6_t80000gn/T/test--52991-2znYgdEaz9vH
+      > Compiled successfully using:
+         - solc: 0.6.11+commit.5ef660b1.Emscripten.clang
+
+
+         Contract: Bank
+         李佳银行
+            ✓ 得到银行名称 (129ms)
+         BN { negative: 0, words: [ 10, <1 empty item> ], length: 1, red: null }
+            ✓ 存款 (347ms)
+            ✓ 取款 (428ms)
+
+
+         3 passing (1s)
+
+      
+
 
 
 ## 通过 Metamask 向Bank合约转账ETH
@@ -112,13 +164,27 @@ contract Bank{
  
 - 存款记录RinkeBy URL:https://rinkeby.etherscan.io/address/0x287ce0fcf7dcc0049eaa3e72a2b691f30c1f031f
 
-
+- 
 
 ## 在Bank合约记录每个地址转账⾦额
 
-- 
+- 转账动作
+  - 转账之前:
+    - ![image.png](./img/tran_before1.png)
+    - ![image.png](./img/tran_before2.png)
+  - 转账:
+    -![image.png](./img/tran_ing1.png)
+  - 转账之后   
+    - ![image.png](./img/trans_after1.png)
 
 - [转账日志](https://rinkeby.etherscan.io/tx/0xadad76d9d863e1b73dd045c38039ccb90ccb48583a69060c2684adb95ecf7011#eventlog)
+  - ![image.png](./img/trans_record1.png)
+  - ![image.png](./img/trans_record2.png)
+
 
 ## 编写 Bank合约withdraw(), 实现提取出所有的 ETH
 
+- 提现
+  - ![image.png](./img/with_before1.png)
+  - ![image.png](./img/with_after.png)
+- 提现交易hash地址 :https://rinkeby.etherscan.io/tx/0xc96b4e5656b2155cd2137731b4e4f9b8c4e46d056bd66a4c9eec0a987264bee1
