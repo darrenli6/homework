@@ -1,0 +1,10 @@
+{
+    "private_key": "8e54a356b9122d113bca996bf1f3881806ebb60aed2778138a498b915a4eaaa0",
+    "network": "ropsten",
+    "ERC20": "0x34a5000076068E43D304742eb4cF3a08b7a34952",
+    "name": "LIJIA Coin",
+    "symbol": "DAC",
+    "total_supply": "0",
+    "decimals": 2
+  }
+  
