@@ -3,5 +3,8 @@ node_modules/*
 
 .DS_Store
 
+test/config.json
  
 *.DS_Store*
+
+

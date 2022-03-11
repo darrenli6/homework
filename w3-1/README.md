@@ -118,7 +118,7 @@ $ npm install truffle -g //安装truffle过就请跳过
 $ truffle init	//初始化truffle环境
 $ npm install @openzeppelin/contracts@2.5.0	//安装openzeppelin合约
 $ npm install --save ethers
- 
+$ npm install @truffle/hdwallet-provider 
 $ npm install fs-extra@8.1.0 solc@0.5.11  
 
  
