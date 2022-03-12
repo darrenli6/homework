@@ -120,8 +120,125 @@ $ npm install @openzeppelin/contracts@2.5.0	//安装openzeppelin合约
 $ npm install --save ethers
 $ npm install @truffle/hdwallet-provider 
 $ npm install fs-extra@8.1.0 solc@0.5.11  
+$ npm install create-react-app 
 
  
 ```
 
-- 在contract文件下,创建vault合约.
+- 在contract文件下,创建[vault合约](w3-1/code2/contracts/Vault.sol),添加库.
+
+- 编译
+```
+truffle compile 
+```
+
+- 部署,得到合约地址:https://ropsten.etherscan.io/address/0x8ed56a342e0a92478831efa1ce42a409b4394cf9
+
+```
+truffle migrate 
+```
+
+#### 创建前端项目
+
+- 创建项目
+```
+create-react-app vault-with-react
+```
+
+- package.json ,库如下
+
+```
+{
+  "name": "vault-with-react",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "react": "^16.6.3",
+    "react-dom": "^16.6.3",
+    "react-layui-layer": "^0.0.4",
+    "react-scripts": "2.1.1",
+    "semantic-ui-css": "^2.4.1",
+    "semantic-ui-react": "^0.83.0",
+    "solc": "^0.4.25",
+    "web3": "^1.0.0-beta.36"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}
+
+
+```
+
+下载库
+```
+npm install 
+
+```
+
+- 初始化react,清理不必要的文件
+
+- 创建文件夹 
+
+  - eth  与eth交互
+  - util 工具文件夹
+  - display 前端页面
+    - 基础信息
+    - ERC20代币信息
+    - 交互操作
+  - ![image](./img/display.png)
+
+
+#### 通过前端进行测试
+
+- 页面展示
+  - 基本信息
+    ![image](./img/display.png)
+  - ERC20代币信息
+    ![image](./img/2-2_erc20.png)
+  - 交互操作
+    ![image](./img/2-3opt.png)
+- 挖矿
+  - ![image](./img/2-5wa.png) 
+  - https://ropsten.etherscan.io/tx/0x40c8d91681e94db3e9604f1ea7920c1dfb63abaa10fdcea488a0b44311af8855
+- 查看余额
+  - ![image](./img/2-4addrvalue.png)
+
+- 授权
+  - ![image](./img/2-1shouquan.png)
+  - https://ropsten.etherscan.io/tx/0xb25ea5de735732bf7785eb925705aea04575ed74d6666ebf8f27b7584aa17926  
+- 查看授权账户余额
+  - ![image](./img/2-6chaauth.png)
+- 存款,2 LJC
+  - ![image](./img/2-7cun.png)
+  - https://ropsten.etherscan.io/tx/0x4a5ec125345cfa0d0e399f7a197cce9c9b7f25b7ec742098d6087baa97b9f395
+  - 查询余额
+  - ![image](./img/2-8yue.png)
+  - 查看授权余额 
+  - ![image](./img/2-9shouyue.png)
+- 提现 1LJC
+  - ![image](./img/2-10ti.png)
+  - https://ropsten.etherscan.io/tx/0x90df335ad72eecba961e5dbc3bb3a88cbb98b7b3bce84709f8cd7a62b8281bc9
+  - 查询余额  
+  - ![image](./img/2-11cha.png)

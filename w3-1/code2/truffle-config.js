@@ -61,6 +61,17 @@ module.exports = {
       timeoutBlocks: 200,  // # of blocks before a deployment times out  (minimum/default: 50)
       skipDryRun: true     // Skip dry run before migrations? (default: false for public nets )
       },
+
+      rinkeby: {
+        provider: () => new HDWalletProvider(mnemonic, `https://rinkeby.infura.io/v3/420062e291fb4d81998324326d036ec4`),
+        network_id: 3,       // Ropsten's id
+        gas: 5500000,        // Ropsten has a lower block limit than mainnet
+        confirmations: 2,    // # of confs to wait between deployments. (default: 0)
+        timeoutBlocks: 200,  // # of blocks before a deployment times out  (minimum/default: 50)
+        skipDryRun: true     // Skip dry run before migrations? (default: false for public nets )
+        },
+
+      
     // Another network with more advanced options...
     // advanced: {
     // port: 8777,             // Custom port
