@@ -34,7 +34,9 @@ module.exports = {
     },
     rinkeby:{
        url: "https://rinkeby.infura.io/v3/420062e291fb4d81998324326d036ec4",
-      
+       accounts:{
+        mnemonic:mnemonic,
+      }
     }
   }
 };

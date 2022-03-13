@@ -67,7 +67,18 @@ npx hardhat run scripts/deploy_erc721.js --network dev
   - ![image](./img/1scan.png)
   - ![image](./img/2event.png)
 
-- 编写解析[代码](code1/scripts/parse_log.js)
+- 编写解析转账事件的[代码](code1/scripts/parse_log.js)
+
+```
+async function parseTransferEvent(event) {
+    const TransferEvent = new ethers.utils.Interface(["event Transfer( address indexed _from, address indexed _to, uint256 indexed _tokenId )"]);
+    let decodedData = TransferEvent.parseLog(event);
+    // console.log("decodedData "+decodedData.args);
+    console.log("_from:" + decodedData.args._from);
+    console.log("_to:" + decodedData.args._to);
+    console.log("_tokenId :" + decodedData.args._tokenId.toString());
+}   
+```
 
 ```
 darren@darrendeMacBook-Pro code1 % npx hardhat run scripts/parse_log.js --network rinkeby
@@ -199,13 +210,87 @@ CREATE TABLE `eth_users` (
   UNIQUE KEY `uni` (`address`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
- CREATE TABLE `eth_owner` (
+
+CREATE TABLE `eth_owner` (
   `id` bigint unsigned NOT NULL AUTO_INCREMENT,
   `tokenid` varchar(100) DEFAULT '',
   `userid` bigint DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `tokenid` (`tokenid`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 ```
 
+- 记录到数据库中，
 
+
+```
+var  addSql = 'INSERT INTO eth_users(Id,address) VALUES(0,?)';
+var  addSqlParams = [decodedData.args._to];
+ 
+connection.query(addSql,addSqlParams,function (err, result) {
+        if(err){
+         console.log('[INSERT ERROR] - ',err.message);
+         return;
+        }        
+ 
+       console.log('--------------------------INSERT----------------------------');
+       //console.log('INSERT ID:',result.insertId);        
+       console.log('INSERT ID:',result);        
+       console.log('-----------------------------------------------------------------\n\n');  
+});
+
+
+// @param {number} type 1是所有数据，2是获取只取一条，3是count（*）
+var result =execute("SELECT * FROM  eth_users where address='"+decodedData.args._to+"'",1)
+result.then(result => {
+    console.log(result[0].id)
+
+    var re=execute("SELECT * FROM eth_owner where tokenid='"+decodedData.args._tokenId.toString()+"'",1)
+  // 遍历是否有 address tokenid 
+
+    // 如果没有插入
+
+    re.then(res1=>{
+        //console.log(res1.length);
+        if (res1.length==0){
+            var addVal = [[result[0].id,decodedData.args._tokenId.toString()]];
+
+            var ir=many_execute( "insert into eth_owner(userid,tokenid) values ?", addVal)  
+        }else{
+            // 如果有 删除 再插入,覆盖
+
+            del("eth_owner", "tokenid='"+decodedData.args._tokenId.toString()+"'") 
+            var addVal = [[result[0].id,decodedData.args._tokenId.toString()]];
+
+            var ir=many_execute( "insert into eth_owner(userid,tokenid) values ?", addVal)  
+
+        }
+    })
+
+}).catch(error => console.log(error) )
+```
+
+
+
+- 可方便查询用户持有的所有NFT
+  
+切换到终端
+
+```
+mysql> select * from eth_owner a
+    -> left join eth_users b on b.id=a.userid
+    -> where b.address = "0x3E6ba59EfFa8d6f3f550287F33b3E6C250C83af0";
++----+---------+--------+------+--------------------------------------------+
+| id | tokenid | userid | id   | address                                    |
++----+---------+--------+------+--------------------------------------------+
+| 18 | 6       |      7 |    7 | 0x3E6ba59EfFa8d6f3f550287F33b3E6C250C83af0 |
+| 21 | 3       |      7 |    7 | 0x3E6ba59EfFa8d6f3f550287F33b3E6C250C83af0 |
++----+---------+--------+------+--------------------------------------------+
+2 rows in set (0.01 sec)
+
+```
+
+```
+
+```
