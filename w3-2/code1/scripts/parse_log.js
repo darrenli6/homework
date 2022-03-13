@@ -140,7 +140,7 @@ result.then(result => {
     console.log(result[0].id)
 
     var re=execute("SELECT * FROM eth_owner where tokenid='"+decodedData.args._tokenId.toString()+"'",1)
-// 遍历是否有 address tokenid 
+  // 遍历是否有 address tokenid 
 
     // 如果没有插入
 
