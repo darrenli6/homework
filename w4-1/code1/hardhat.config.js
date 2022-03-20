@@ -35,7 +35,16 @@ module.exports = {
       chainId:4,
       accounts:{
        mnemonic:mnemonic,
-     }
+     },
+     
+  },
+  ropsten:{
+    url: "https://ropsten.infura.io/v3/18c8ae876f7f46e881287af88b7bee80",
+    chainId:3,
+    accounts:{
+     mnemonic:mnemonic,
    }
-  }
+ }
+}
+
 };

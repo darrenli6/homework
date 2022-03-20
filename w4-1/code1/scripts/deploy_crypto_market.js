@@ -24,8 +24,11 @@ async function main() {
   console.log("owner现在持有token"+ ethers.utils.formatUnits(a,18));
   let MyCryptoMarket= await ethers.getContractFactory("CryptoMarket");
 
-  let routeaddr ="0x9E545E3C0baAB3E08CdfD552C960A1050f373042";
-  let wethaddr = "0x84eA74d481Ee0A5332c457a4d796187F6Ba67fEB";
+//   let routeaddr ="0x9E545E3C0baAB3E08CdfD552C960A1050f373042";
+//   let wethaddr = "0x84eA74d481Ee0A5332c457a4d796187F6Ba67fEB";
+
+  let routeaddr ="0xd507f9CA60a809358E1F0B88209DAE311cff74Fc";
+  let wethaddr = "0x211848E6fe90c84099Ab46cD92b00cAa6952f4d5";
 
   let market = await MyCryptoMarket.deploy(
       atoken.address,

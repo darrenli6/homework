@@ -40,6 +40,6 @@ contract CryptoMarket{
 
          IUniswapV2Router01(router).swapExactETHForTokens{value:msg.value}(minTokenAmount, path, msg.sender, block.timestamp);
      }
-   
+      
 
 }
