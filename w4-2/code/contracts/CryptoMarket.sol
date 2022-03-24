@@ -2,6 +2,7 @@
 pragma solidity ^0.8.0;
 
 import "./IUniswapV2Router.sol";
+import "./IMasterChef.sol";
 
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 import "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol";
@@ -15,10 +16,14 @@ contract CryptoMarket{
 
     address public weth;
 
-    constructor(address _token,address _router, address _weth){
+    address public masterchef;
+
+    constructor(address _token,address _router, address _weth,address _masterchef){
         mytoken = _token;
         router =_router;
         weth =_weth;
+        masterchef=_masterchef;
+
     }
 
     // 添加流动性
@@ -38,7 +43,14 @@ contract CryptoMarket{
          path[0]=weth;
          path[1]= mytoken;
 
-         IUniswapV2Router01(router).swapExactETHForTokens{value:msg.value}(minTokenAmount, path, msg.sender, block.timestamp);
+         IUniswapV2Router01(router).swapExactETHForTokens{value:msg.value}(minTokenAmount, path, address(this), block.timestamp);
+     
+        // 存入
+         uint amount= IERC20(mytoken).balanceOf(address(this));
+          IERC20(mytoken).safeApprove(masterchef,amount);
+         IMasterChef(masterchef).deposit(1,amount);
+
+     
      }
      
      
