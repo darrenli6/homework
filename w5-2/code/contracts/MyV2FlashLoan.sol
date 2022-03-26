@@ -10,7 +10,10 @@ import { FlashLoanReceiverBase } from './interfaces/FlashLoanReceiverBase.sol';
 contract MyV2FlashLoan is FlashLoanReceiverBase{
 
 
+
 using SafeMath for uint256;
+
+event Log(string message,uint val);
 
 address public kovanUsdc = 0xe22da380ee6B445bb8273C81944ADEB6E8450422;
 address public kovanAave = 0xB597cd8D3217ea6477232F9217fa70837ff667Af;
@@ -45,14 +48,16 @@ From 0x0000000000000000000000000000000000000000To 0x464c71f6c2f760dda6093dcb91c2
 From 0x1dba5d30200ae4c34cbc9d928890b0a7bfc61dc0To 0xe12afec5aa12cf614678f9bfeeb98ca9bb95b5b0 For 1,000,900 USD Coin (USDC)
  1,000,900 从我合约payback
 
-
-
 */
+
 
 
        // 还款  必须让操作自己资产    premiums 0.09%利息
         for (uint i=0;i<assets.length;i++){
+
              uint amountOwing = amounts[i].add(premiums[i]);
+             
+             emit Log("amountOwing ",amountOwing);
              IERC20(assets[i]).approve(address(LENDING_POOL),amountOwing);
         }
         return true;

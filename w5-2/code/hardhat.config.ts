@@ -48,7 +48,15 @@ export default {
       },
       gas: 21000000,
       gasPrice: 8000000000
-    }
+    },
+    kovan:{
+      url: "https://kovan.infura.io/v3/18c8ae876f7f46e881287af88b7bee80",
+      accounts:{
+       mnemonic:mnemonic,
+     },
+     gas: 21000000,
+     gasPrice: 8000000000
+   }
   },
   watcher: {
     ci: {
