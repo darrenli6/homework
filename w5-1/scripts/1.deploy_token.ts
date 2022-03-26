@@ -2,7 +2,7 @@
 import { Token } from '../typechain/Token'
 import { ethers } from 'hardhat'
 
-
+// 部署token
 async function main() {
   // await hre.run('compile');
 

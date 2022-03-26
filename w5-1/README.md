@@ -91,4 +91,69 @@ https://rinkeby.etherscan.io/address/0xb795A877bFc364b2b23A09b3FF1A6726Db4118b2
 
 
 
+- [闪电贷合约](w5-1/contracts/TestUniswapFlashSwap.sol)
+
+部署 
+```
+npx hardhat run scripts/3.make_flashloan.ts --network rinkeby 
+
+Generating typings for: 2 artifacts in dir: typechain for target: ethers-v5
+Successfully generated 7 typings!
+Compiled 1 Solidity file successfully
+uniswapFlashSwap 的合约地址:0xAb5186829296fd0cDC7A860dDEB2c8F562dDF505
+```
+
+hash URL 地址是 https://rinkeby.etherscan.io/address/0xAb5186829296fd0cDC7A860dDEB2c8F562dDF505
+
+
+- 往合约中存入手续费，[脚本](w5-1/scripts/4.deposite_flashloan_fee.ts)
+ ```
+darren@darrendeMacBook-Pro w5-1 % npx hardhat run scripts/4.deposite_flashloan_fee.ts --network rinkeby
+No need to generate any newer typings.
+uniswapFlashSwap 的合约地址:0xAb5186829296fd0cDC7A860dDEB2c8F562dDF505
+向地址:0xAb5186829296fd0cDC7A860dDEB2c8F562dDF505 转账10000000000
+ ``` 
+
+
+
+- 执行闪电贷,[脚本](w5-1/scripts/5.exe_flashloan.ts)
+```
+darren@darrendeMacBook-Pro w5-1 % npx hardhat run scripts/5.exe_flashloan.ts --network rinkeby
+No need to generate any newer typings.
+uniswapFlashSwap 的合约地址:0xAb5186829296fd0cDC7A860dDEB2c8F562dDF505
+flash loan
+
+```
+
+hashurl: https://rinkeby.etherscan.io/tx/0x6c268270c37f06ca7057c9b42bb398c8c360130aaf45421bf206a1a104c6b827
+
+获取部分日志
+
+```
+
+// 我从uniswap pair对合约中借出30 dai
+From 0xbca4229f04c8a81dfeb561292fc0faa98c2517fcTo 0xab5186829296fd0cdc7a860ddeb2c8f562ddf505 For 30 DAI (DAI)
+// 归还本金 +手续费
+From 0xab5186829296fd0cdc7a860ddeb2c8f562ddf505To 0xbca4229f04c8a81dfeb561292fc0faa98c2517fc For 30.1 DAI (DAI)
+
+
+```
+
+
+
+
+- 部署UniswapV2,Swap功能，[脚本](w5-1/scripts/6.deploy_swap.ts)
+
+```
+darren@darrendeMacBook-Pro w5-1 % npx hardhat run scripts/6.deploy_swap.ts --network rinkeby
+No need to generate any newer typings.
+uniswapFlashSwap 的合约地址:0x6288b014019dbF32e852Ef5F7B4F76eA2e16f657
+预计可以用dai换dTH  BigNumber { value: "1679" }
+成功swap 1679
+```
+
+
+
+
+
 
