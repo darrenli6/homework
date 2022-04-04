@@ -236,6 +236,121 @@ Moved 1 blocks
 ✨  Done in 3.64s.
 ```
 
+## [Treasury合约](w6-2/code/contracts/Treasury.sol)
+
+
+- 充值 
+
+```
+darren@darrendeMacBook-Pro code % yarn hardhat console --network localhost
+yarn run v1.22.17
+$ /Users/darren/Documents/project/ok/homework/w6-2/code/node_modules/.bin/hardhat console --network localhost
+No need to generate any newer typings.
+Welcome to Node.js v16.14.0.
+Type ".help" for more information.
+>   const treasury = await ethers.getContract("Treasury");
+undefined
+> 
+>      const total = await treasury.total();
+undefined
+>   console.log(`投票之后的,合约里的eth：${total.toString()}`);
+投票之后的,合约里的eth：0
+undefined
+> await treasury.deposit({value:1000000000000000});
+{
+  hash: '0x6e9900ef4bb3989010c42a32ab164272566e364360c9f1ef8d400e184c3b4b2a',
+  type: 2,
+  accessList: [],
+  blockHash: '0xe88038e0acf80c88c4774f5b467722f679fccb3d411692ae6af850b6380f39bd',
+  blockNumber: 12,
+  transactionIndex: 0,
+  confirmations: 1,
+  from: '0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266',
+  gasPrice: BigNumber { _hex: '0x490d2bef', _isBigNumber: true },
+  maxPriorityFeePerGas: BigNumber { _hex: '0x3b9aca00', _isBigNumber: true },
+  maxFeePerGas: BigNumber { _hex: '0x4c9f8df2', _isBigNumber: true },
+  gasLimit: BigNumber { _hex: '0x0101a5', _isBigNumber: true },
+  to: '0x8A791620dd6260079BF849Dc5567aDC3F2FdC318',
+  value: BigNumber { _hex: '0x038d7ea4c68000', _isBigNumber: true },
+  nonce: 11,
+  data: '0xd0e30db0',
+  r: '0xeb71a8f6aae7f06ffac645dbad9c36b47d8409fec8fae2bb2c441db348ca7bba',
+  s: '0x36e971211f0785b3e05826bfc68528a7d0ba5396637e96d68300de5ddd8710b5',
+  v: 1,
+  creates: null,
+  chainId: 31337,
+  wait: [Function (anonymous)]
+}
+ 
+>      const total1 = await treasury.total();
+undefined
+>   console.log(`投票之后的,合约里的eth：${total1.toString()}`);
+投票之后的,合约里的eth：1000000000000000
+undefined
+>      const total12 = await treasury.total();
+undefined
+>   console.log(`投票之后的,合约里的eth：${total12.toString()}`);
+投票之后的,合约里的eth：0
+undefined
+```
+
+- 发起提案 
+
+```
+darren@darrendeMacBook-Pro code % yarn hardhat run scripts/propose-treasury.ts --network localhost
+yarn run v1.22.17
+$ /Users/darren/Documents/project/ok/homework/w6-2/code/node_modules/.bin/hardhat run scripts/propose-treasury.ts --network localhost
+No need to generate any newer typings.
+ encodedFunctionCall调用   0x853828b6
+ 提案地址: 0x8A791620dd6260079BF849Dc5567aDC3F2FdC318 
+ 提案描述: 提取所有的ETH 
+Moving blocks...
+Moved 2 blocks
+✨  Done in 3.52s.
+```
+
+- 投票
+
+```
+darren@darrendeMacBook-Pro code % yarn hardhat run scripts/vote-treasury.ts --network localhost             
+yarn run v1.22.17
+$ /Users/darren/Documents/project/ok/homework/w6-2/code/node_modules/.bin/hardhat run scripts/vote-treasury.ts --network localhost
+No need to generate any newer typings.
+25542945493814533641929766366118133607425864431741204817230571751585596942381
+Moving blocks...
+Moved 6 blocks
+已经为提款投票!
+✨  Done in 3.24s.
+```
+
+- 执行提案 
+
+```
+darren@darrendeMacBook-Pro code % yarn hardhat run scripts/queue-and-execute-treasury.ts --network localhost
+yarn run v1.22.17
+$ /Users/darren/Documents/project/ok/homework/w6-2/code/node_modules/.bin/hardhat run scripts/queue-and-execute-treasury.ts --network localhost
+No need to generate any newer typings.
+进入队列 即将执行
+Moving blocks...
+Moved forward in time 3601 seconds
+Moving blocks...
+Moved 1 blocks
+执行中
+投票之后的,合约里的eth：0
+✨  Done in 3.33s.
+```
+
+- 检验
+```
+darren@darrendeMacBook-Pro code % yarn hardhat console --network localhost
+ 
+>      const total12 = await treasury.total();
+undefined
+>   console.log(`投票之后的,合约里的eth：${total12.toString()}`);
+投票之后的,合约里的eth：0
+undefined
+```
+
 
 # 错误 
 

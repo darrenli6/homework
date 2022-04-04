@@ -15,4 +15,8 @@ export const developmentChains = ["hardhat", "localhost"]
 export const proposalsFile = "proposals.json"
 
 
+export const TREASURY_FUNC="withdrawAll"
+export const TREASURY_PROPOSAL_DESCRIPTION = "提取所有的ETH"
+export const TREASURY_proposalsFile = "proposals-treasury.json"
+
 
