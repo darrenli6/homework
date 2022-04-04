@@ -14,3 +14,5 @@ export const PROPOSAL_DESCRIPTION = "提案 将 77 存储到box合约中"
 export const developmentChains = ["hardhat", "localhost"]
 export const proposalsFile = "proposals.json"
 
+
+

@@ -1,7 +1,7 @@
 * 实现⼀个通过 DAO 管理资⾦的Treasury：
    * 管理员可以从Treasury合约中提取资⾦withdraw（）
    * 治理Gov合约作为管理员
-   * 通过发起提案从Treasury合约资⾦
+   * 通过发起提案从[Treasury合约](w6-2/code/contracts/Treasury.sol)资⾦
 
 
 
@@ -85,7 +85,11 @@ deploying "GovernorContract" (tx: 0xe2ab83eaa46cfc47de5e54f4a5341f0e3cd6f871c3fb
 部署提案Box
 deploying "Box" (tx: 0xcf13906a2b077e0beb76829d6d9f19d6f8576142288af69a09c54d14398dfad4)...: deployed at 0xa513E6E4b8f2a923D98304ec87F64353C4D5C853 with 445808 gas
 转移授权,转移给timelock合约
+部署提案Treasury
+deploying "Treasury" (tx: 0xa9cb3531b4e3ba5eea5186d2c64f62189d53d3a6a2579b2cf556467b3f3ef3d9)...: deployed at 0x8A791620dd6260079BF849Dc5567aDC3F2FdC318 with 816289 gas
+Treasury转移授权,转移给timelock合约
 ✨  Done in 2.71s.
+
 ```
 
 

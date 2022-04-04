@@ -25,6 +25,7 @@ export type { Box } from "./Box";
 export type { GovernorContract } from "./GovernorContract";
 export type { TimeLock } from "./TimeLock";
 export type { GovernanceToken } from "./GovernanceToken";
+export type { Treasury } from "./Treasury";
 
 export { AccessControl__factory } from "./factories/AccessControl__factory";
 export { IAccessControl__factory } from "./factories/IAccessControl__factory";
@@ -50,3 +51,4 @@ export { Box__factory } from "./factories/Box__factory";
 export { GovernorContract__factory } from "./factories/GovernorContract__factory";
 export { TimeLock__factory } from "./factories/TimeLock__factory";
 export { GovernanceToken__factory } from "./factories/GovernanceToken__factory";
+export { Treasury__factory } from "./factories/Treasury__factory";
