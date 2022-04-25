@@ -32,13 +32,13 @@ const deployTreasury: DeployFunction = async function(
 
       await transferOwnerTx.wait(1);
 
-      log("Treasury转移授权,转移给timelock合约");
-
       
- 
 
-
-
+      log("Treasury转移授权,转移给timelock合约");
+      const treasuryIns = await ethers.getContract("Treasury");
+      await treasuryIns.deposit({value:10000000000});
+      log("充值"+10000000000);
+  
 
 
 }      
